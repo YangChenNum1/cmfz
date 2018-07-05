@@ -42,7 +42,7 @@ public class ManagerController {
                     response.addCookie(c2);
                 }
                 session.setAttribute("manager", manager);
-                return "index";
+                return "redirect:/main.jsp";
             }else{
                 return "login";
             }
