@@ -7,9 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by HP on 2018/7/5.
@@ -26,7 +32,7 @@ public class PictureController {
         return pictureService.queryPictureByPage(nowPage,pageSize);
     }
 
-    @RequestMapping("/insert")
+   /* @RequestMapping("/insert")
     @ResponseBody
     public Map<String,Object> insert(Picture picture){
         Map<String, Object> map=new HashMap<String, Object>();
@@ -38,7 +44,7 @@ public class PictureController {
             map.put("result", "fail");
         }
         return map;
-    }
+    }*/
 
     @RequestMapping("/modify")
     @ResponseBody
@@ -46,6 +52,7 @@ public class PictureController {
         Map<String, Object> map=new HashMap<String, Object>();
         try {
             int result=pictureService.modifyPicture(picture);
+            System.out.println(result);
             map.put("result", "success");
         } catch (Exception e) {
             // TODO: handle exception
@@ -68,4 +75,36 @@ public class PictureController {
         return map;
     }
 
+  @RequestMapping("upload")
+    public @ResponseBody Map<String,Object> upload(MultipartFile myfile, HttpSession session,Picture picture) throws IOException {
+        //1.获得文件夹真实路径
+        String realPath=session.getServletContext().getRealPath("/");
+        //System.out.println("realPath"+realPath);
+        int lastIndexOf=realPath.lastIndexOf("\\");
+        String substring=realPath.substring(0,lastIndexOf);
+        int lastIndexOf1=substring.lastIndexOf("\\");
+        String substring1=realPath.substring(0,lastIndexOf1);
+        String uploadPath=substring1+"\\Files";
+        //System.out.println("uploadPath"+uploadPath);
+       //2.生成UUID
+        String picId= UUID.randomUUID().toString().replace("-", "");
+        picture.setPicId(picId);
+       //3.读取文件后缀名
+        //（1）获取上传文件名称
+        String picPath=myfile.getOriginalFilename();
+        //System.out.println("picPath"+picPath);
+        picture.setPicPath(picPath);
+        //（3）组装
+        //System.out.println("pathname"+uploadPath+"/"+picPath);
+        myfile.transferTo(new File(uploadPath+"\\"+picPath));
+
+        Date date=new Date();
+        picture.setPicDate(date);
+        int num=pictureService.addPicture(picture);
+        Map<String, Object> map=new HashMap<String, Object>();
+        if(num>0){
+            map.put("result","succeess");
+        }
+        return map;
+    }
 }

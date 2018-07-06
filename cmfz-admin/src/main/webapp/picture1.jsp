@@ -26,7 +26,8 @@
         view: detailview,
         detailFormatter: function(rowIndex, rowData){
             return '<table><tr>' +
-                '<td rowspan=2 style="border:0"><img src="image/' + rowData.picPath + '" style="height:50px;"></td>' +
+                /*'<td rowspan=2 style="border:0"><img src="image/' + rowData.picPath + '" style="height:50px;"></td>' +*/
+                '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/Files/' + rowData.picPath + '" style="height:50px;"></td>' +
                 '<td style="border:0">' +
                 '</td>' +
                 '</tr></table>';
@@ -49,8 +50,8 @@
     $("#btn1").linkbutton({
         onClick:function(){
             var rowData = $("#tt").datagrid("getSelected");
-            alert(rowData);
-            $("#tb").dialog({
+            $("#tb2").dialog({
+                title:'修改信息',
                 width:400,
                 height:250,
                 href:"${pageContext.request.contextPath}/form.jsp", //包含子页面
@@ -63,10 +64,11 @@
 
     $("#btn2").linkbutton({
         onClick:function(){
-            $("#tb").dialog({
+            $("#tb2").dialog({
+				title:'添加信息',
                 width:400,
                 height:250,
-                href:"${pageContext.request.contextPath}/form.jsp", //包含子页面
+                href:"${pageContext.request.contextPath}/form1.jsp", //包含子页面
             });
         }
     });
@@ -79,3 +81,4 @@
 	<a id="btn2" href="#" class="easyui-linkbutton"
 	   data-options="iconCls:'icon-add',plain:true,text:'新增'"></a>
 </div>
+<div id="tb2"></div>
