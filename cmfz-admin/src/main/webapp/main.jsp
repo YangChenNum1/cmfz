@@ -34,16 +34,16 @@
     });
     function addTab(res,path) {
         // 调用选项卡的addTab新增选项卡
-        var exists = $("#tt").tabs("exists",res);
+        var exists = $("#tt_main").tabs("exists",res);
         if(!exists){
-            $("#tt").tabs("add",{
+            $("#tt_main").tabs("add",{
                 iconCls:"icon-ok",
                 title:res,
                 href:"${pageContext.request.contextPath}/"+path, // 一个菜单项 对应一个需要加载的数据页面
                 closable:true,
             });
         }else{
-            $("#tt").tabs("select",res);
+            $("#tt_main").tabs("select",res);
         }
     }
 </script>
@@ -73,7 +73,7 @@
 		</div>  
     </div>   
     <div data-options="region:'center'">
-    	<div id="tt" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">   
+    	<div id="tt_main" class="easyui-tabs" data-options="fit:true,narrow:true,pill:true">
 		    <div title="主页" data-options="iconCls:'icon-neighbourhood',"  style="background-image:url(/cmfz-admin/img/shouye.jpg);background-repeat: no-repeat;background-size:100% 120%;"></div>
 		</div>
     </div>   

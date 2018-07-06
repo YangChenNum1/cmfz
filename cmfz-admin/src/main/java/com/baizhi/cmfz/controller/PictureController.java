@@ -32,19 +32,6 @@ public class PictureController {
         return pictureService.queryPictureByPage(nowPage,pageSize);
     }
 
-   /* @RequestMapping("/insert")
-    @ResponseBody
-    public Map<String,Object> insert(Picture picture){
-        Map<String, Object> map=new HashMap<String, Object>();
-        try {
-            pictureService.addPicture(picture);
-            map.put("result", "success");
-        } catch (Exception e) {
-            // TODO: handle exception
-            map.put("result", "fail");
-        }
-        return map;
-    }*/
 
     @RequestMapping("/modify")
     @ResponseBody
@@ -78,6 +65,7 @@ public class PictureController {
   @RequestMapping("upload")
     public @ResponseBody Map<String,Object> upload(MultipartFile myfile, HttpSession session,Picture picture) throws IOException {
         //1.获得文件夹真实路径
+      System.out.println("uefuweridfhieuhgioerhioyhuigui");
         String realPath=session.getServletContext().getRealPath("/");
         //System.out.println("realPath"+realPath);
         int lastIndexOf=realPath.lastIndexOf("\\");

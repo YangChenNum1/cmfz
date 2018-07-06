@@ -12,7 +12,10 @@
 					success:function(res){
 						var d=JSON.parse(res);
 						if(d.result!=null){
-                            location.href="${pageContext.request.contextPath}/main.jsp";
+                            $("#tt_pic").datagrid({
+                                url : "${pageContext.request.contextPath}/picture/findByPage"
+                            });
+                            $("#tb2").dialog('close');
 						}else{
 							location.href="${pageContext.request.contextPath}/form.jsp";
 						}

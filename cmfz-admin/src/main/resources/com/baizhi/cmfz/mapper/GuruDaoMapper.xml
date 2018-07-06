@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.GuruDao">
+    
+    <resultMap id="GuruResultMap" type="com.baizhi.cmfz.entity.Guru">
+        <id property="guruId" column="guru_id"></id>
+        <result property="guruName" column="guru_name"></result>
+        <result property="guruPhoto" column="guru_photo"></result>
+        <result property="guruSummer" column="guru_summer"></result>
+    </resultMap>
+
+    <select id="findGuruByPage" resultMap="GuruResultMap">
+        select * from t_guru limit #{begin},#{pageSize}
+    </select>
+
+    <select id="findGuruByPageMohu" resultMap="GuruResultMap">
+        select * from t_guru
+        <where>
+            <if test="value!=null">
+                guru_name like #{value}
+            </if>
+        </where>
+        limit #{begin},#{pageSize}
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from t_guru
+    </select>
+
+    <select id="selectCountMohu" resultType="java.lang.Integer">
+        select count(*) from t_guru
+        <where>
+            <if test="value!=null">
+                guru_name like #{value}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateGuru">
+        update t_guru set guru_name=#{guruName},guru_photo=#{guruPhoto},guru_summer=#{guruSummer} where guru_id=#{guruId}
+    </update>
+
+    <insert id="insertGuru">
+        insert into t_guru values(#{guruId},#{guruName},#{guruPhoto},#{guruSummer})
+    </insert>
+
+</mapper>

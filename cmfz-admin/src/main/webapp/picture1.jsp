@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8" isELIgnored="false" %>
 <script type="text/javascript">
-    $('#tt').datagrid({
+    $('#tt_pic').datagrid({
         title:'DataGrid - DetailView',
         width:500,
         height:250,
+        fit:true,
         remoteSort:false,
         singleSelect:true,
         nowrap:false,
@@ -31,25 +32,12 @@
                 '<td style="border:0">' +
                 '</td>' +
                 '</tr></table>';
-        }/*,
-        toolbar: [{
-            iconCls: 'icon-edit',
-            handler: function(){alert('编辑按钮')},
-			text:'编辑'
-        },'-',{
-            iconCls: 'icon-help',
-            handler: function(){alert('帮助按钮')},
-            text:'帮助'
-        },'-',{
-            iconCls: 'icon-ok',
-            handler: function(){alert('添加按钮')},
-            text:'添加'
-        }]*/
+        }
     });
 
     $("#btn1").linkbutton({
         onClick:function(){
-            var rowData = $("#tt").datagrid("getSelected");
+            var rowData = $("#tt_pic").datagrid("getSelected");
             $("#tb2").dialog({
                 title:'修改信息',
                 width:400,
@@ -72,9 +60,8 @@
             });
         }
     });
-
 </script>
-<table id="tt"></table>
+<table id="tt_pic"></table>
 <div id="tb" style="display: none">
 	<a href="#" id="btn1" class="easyui-linkbutton"
 	   data-options="iconCls:'icon-edit',plain:true,text:'修改'"></a>
