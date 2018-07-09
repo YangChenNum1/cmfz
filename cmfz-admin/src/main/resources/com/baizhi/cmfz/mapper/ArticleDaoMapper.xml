@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.ArticleDao">
+    
+    <resultMap id="ArticleResultMap" type="Article">
+        <id property="artId" column="article_id"></id>
+        <result property="artName" column="article_name"></result>
+        <result property="guruId" column="guru_id"></result>
+        <result property="artDescrip" column="article_description"></result>
+        <result property="artDate" column="article_date"></result>
+    </resultMap>
+
+    <insert id="insertArticle">
+        insert into t_article values(#{artId},#{artName},#{guruId},#{artDescrip},sysdate())
+    </insert>
+
+</mapper>

@@ -51,4 +51,14 @@ public class GuruServiceImpl implements GuruService {
     public int modifyGuru(Guru guru) {
         return guruDao.updateGuru(guru);
     }
+
+    @Override
+    public List<Guru> queryAllGuru() {
+        return guruDao.selectAllGuru();
+    }
+
+    @Override
+    public int addAllGuru(List<Guru> gurus) {
+        return guruDao.insertBatch(gurus);
+    }
 }

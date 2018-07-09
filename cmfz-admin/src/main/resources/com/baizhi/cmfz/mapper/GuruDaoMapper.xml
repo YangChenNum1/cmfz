@@ -43,5 +43,17 @@
     <insert id="insertGuru">
         insert into t_guru values(#{guruId},#{guruName},#{guruPhoto},#{guruSummer})
     </insert>
+    
+    <select id="selectAllGuru" resultMap="GuruResultMap">
+        select * from t_guru
+    </select>
+    
+    <insert id="insertBatch">
+        insert into t_guru
+        values
+            <foreach collection="list" separator="," item="guru">
+                (#{guru.guruId},#{guru.guruName},#{guru.guruPhoto},#{guru.guruSummer})
+            </foreach>
+    </insert>
 
 </mapper>

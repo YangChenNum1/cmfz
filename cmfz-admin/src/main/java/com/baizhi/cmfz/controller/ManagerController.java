@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 /**
@@ -26,7 +27,7 @@ public class ManagerController {
     public ManagerService managerService;
 
     @RequestMapping("/login")
-    public String login(String mgrName,String mgrPwd,String enCode,HttpSession session,String isRememberUsername,HttpServletResponse response){
+    public String login(String mgrName,String mgrPwd,String enCode,HttpSession session,String isRememberUsername,HttpServletResponse response)throws Exception{
         if(isRememberUsername==null){
             isRememberUsername="false";
         }
@@ -36,8 +37,8 @@ public class ManagerController {
         if(manager!=null){
             if(enCode.equalsIgnoreCase((String) session.getAttribute("sessionCode"))){
                 if (isRememberUsername.equals("true")){
-                    Cookie c1=new Cookie("mgrName",mgrName);
-                    Cookie c2=new Cookie("mgrPwd",mgrPwd);
+                    Cookie c1=new Cookie("mgrName",URLEncoder.encode(mgrName,"UTF-8"));
+                    Cookie c2=new Cookie("mgrPwd",URLEncoder.encode(mgrPwd,"UTF-8"));
                     response.addCookie(c1);
                     response.addCookie(c2);
                 }

@@ -51,4 +51,17 @@ public interface GuruDao {
      */
     public int selectCountMohu(@Param("value") String value);
 
+    /**
+     * 查询所有上师
+     * @return
+     */
+    public List<Guru> selectAllGuru();
+
+    /**
+     * 批量插入
+     * @param list
+     * @return
+     */
+    public int insertBatch(List<Guru> list);
+
 }

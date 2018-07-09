@@ -72,6 +72,18 @@
             });
         }
     });
+
+    $("#btn3").linkbutton({
+        onClick:function(){
+            $("#tb2_guru").dialog({
+                title:'批量插入',
+                width:400,
+                height:250,
+                href:"${pageContext.request.contextPath}/guruAddMore.jsp", //包含子页面
+            });
+        }
+    });
+
     function qq(value,name) {
         alert(value + ":" + name);
         $("#tt_guru").datagrid({
@@ -87,6 +99,10 @@
 	   data-options="iconCls:'icon-edit',plain:true,text:'修改'"></a>
 	<a id="btn2" href="#" class="easyui-linkbutton"
 	   data-options="iconCls:'icon-add',plain:true,text:'新增'"></a>
+	<a id="btn3" href="#" class="easyui-linkbutton"
+	   data-options="iconCls:'icon-add',plain:true,text:'批量插入'"></a>
+	<a id="btn4" href="${pageContext.request.contextPath}/guru/export" class="easyui-linkbutton"
+	   data-options="iconCls:'icon-ok',plain:true,text:'导出文件'"></a>
 	<input
 			id="ss" class="easyui-searchbox" style="width:300px"
 			data-options="searcher:qq,prompt:'请您输入需要模糊查询的内容',menu:'#mm'"></input>

@@ -1,14 +1,22 @@
 package com.baizhi.cmfz.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import cn.afterturn.easypoi.excel.annotation.ExcelTarget;
+
 import java.io.Serializable;
 
 /**
  * Created by HP on 2018/7/6.
  */
+@ExcelTarget("Guru")
 public class Guru implements Serializable {
+    @Excel(name = "guruId",height = 20,width = 30)
     private String guruId;
+    @Excel(name = "guruName",height = 20,width = 30)
     private String guruName;
+    @Excel(name = "guruPhoto",height = 20,width = 30)
     private String guruPhoto;
+    @Excel(name = "guruSummer",height = 20,width = 30)
     private String guruSummer;
 
     public Guru() {
